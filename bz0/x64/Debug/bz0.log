@@ -1,0 +1,25 @@
+﻿  kr0.c
+C:\Users\Huawei\source\repos\kurs\bz0\kr0.c(87,14): warning C4477: "scanf": в строке форматирования "%s" требуется аргумент типа "char *", но вариативный аргумент "1" имеет тип "char *(*)[12]"
+C:\Users\Huawei\source\repos\kurs\bz0\kr0.c(88,11): warning C4477: "printf": в строке форматирования "%s" требуется аргумент типа "char *", но вариативный аргумент "1" имеет тип "char **"
+C:\Users\Huawei\source\repos\kurs\bz0\kr0.c(89,51): warning C4047: функция: "char *" отличается по уровням косвенного обращения от "char *[12]"
+C:\Users\Huawei\source\repos\kurs\bz0\kr0.c(89,51): warning C4024: SearchByDate: различные типы для формального и фактического параметров 3
+C:\Users\Huawei\source\repos\kurs\bz0\kr0.c(126,16): warning C4477: "fprintf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "3" имеет тип "char *"
+C:\Users\Huawei\source\repos\kurs\bz0\kr0.c(126,16): warning C4313: fprintf: конфликт "%d" в строке формата с аргументом 3 типа "char *"
+C:\Users\Huawei\source\repos\kurs\bz0\kr0.c(126,16): warning C4477: "fprintf": в строке форматирования "%f" требуется аргумент типа "double", но вариативный аргумент "4" имеет тип "char *"
+C:\Users\Huawei\source\repos\kurs\bz0\kr0.c(126,16): warning C4477: "fprintf": в строке форматирования "%lf" требуется аргумент типа "double", но вариативный аргумент "6" имеет тип "char *"
+C:\Users\Huawei\source\repos\kurs\bz0\kr0.c(208,55): warning C4047: return: "base_t *" отличается по уровням косвенного обращения от "int"
+C:\Users\Huawei\source\repos\kurs\bz0\kr0.c(211,58): warning C4047: return: "base_t *" отличается по уровням косвенного обращения от "int"
+C:\Users\Huawei\source\repos\kurs\bz0\kr0.c(214,59): warning C4047: return: "base_t *" отличается по уровням косвенного обращения от "int"
+C:\Users\Huawei\source\repos\kurs\bz0\kr0.c(217,58): warning C4047: return: "base_t *" отличается по уровням косвенного обращения от "int"
+C:\Users\Huawei\source\repos\kurs\bz0\kr0.c(220,55): warning C4047: return: "base_t *" отличается по уровням косвенного обращения от "int"
+C:\Users\Huawei\source\repos\kurs\bz0\kr0.c(223,59): warning C4047: return: "base_t *" отличается по уровням косвенного обращения от "int"
+C:\Users\Huawei\source\repos\kurs\bz0\kr0.c(231,50): warning C4047: return: "base_t *" отличается по уровням косвенного обращения от "int"
+C:\Users\Huawei\source\repos\kurs\bz0\kr0.c(234,53): warning C4047: return: "base_t *" отличается по уровням косвенного обращения от "int"
+C:\Users\Huawei\source\repos\kurs\bz0\kr0.c(237,54): warning C4047: return: "base_t *" отличается по уровням косвенного обращения от "int"
+C:\Users\Huawei\source\repos\kurs\bz0\kr0.c(240,53): warning C4047: return: "base_t *" отличается по уровням косвенного обращения от "int"
+C:\Users\Huawei\source\repos\kurs\bz0\kr0.c(243,50): warning C4047: return: "base_t *" отличается по уровням косвенного обращения от "int"
+C:\Users\Huawei\source\repos\kurs\bz0\kr0.c(246,54): warning C4047: return: "base_t *" отличается по уровням косвенного обращения от "int"
+C:\Users\Huawei\source\repos\kurs\bz0\kr0.c(174): warning C4716: SaveFile: должна возвращать значение
+C:\Users\Huawei\source\repos\kurs\bz0\kr0.c(185): warning C4715: Compare: значение возвращается не при всех путях выполнения
+C:\Users\Huawei\source\repos\kurs\bz0\kr0.c(164): warning C4716: PrintToConsole: должна возвращать значение
+  bz0.vcxproj -> C:\Users\Huawei\source\repos\kurs\x64\Debug\bz0.exe
