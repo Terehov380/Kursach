@@ -6,14 +6,14 @@
 #include <ctype.h>
 #include <malloc.h>
 
-const char Menu[] = "Выберите пункт меню введя соответсвующую цифру:\n"
-"1.Создание новой записи в базе данных\n"
-"2.Чтение всех записей\n"
-"3.Поиск по дате релиза\n"
-"4.Cортировка записей по колличесву установок\n"
-"5.Сохранение новых записей в файл\n"
-"6.Изменение выбранной записи\n"
-"7.Выход из программы\n";
+const char Menu[] = "Р’С‹Р±РµСЂРёС‚Рµ РїСѓРЅРєС‚ РјРµРЅСЋ РІРІРµРґСЏ СЃРѕРѕС‚РІРµС‚СЃРІСѓСЋС‰СѓСЋ С†РёС„СЂСѓ:\n"
+"1.РЎРѕР·РґР°РЅРёРµ РЅРѕРІРѕР№ Р·Р°РїРёСЃРё РІ Р±Р°Р·Рµ РґР°РЅРЅС‹С…\n"
+"2.Р§С‚РµРЅРёРµ РІСЃРµС… Р·Р°РїРёСЃРµР№\n"
+"3.РџРѕРёСЃРє РїРѕ РґР°С‚Рµ СЂРµР»РёР·Р°\n"
+"4.CРѕСЂС‚РёСЂРѕРІРєР° Р·Р°РїРёСЃРµР№ РїРѕ РєРѕР»Р»РёС‡РµСЃРІСѓ СѓСЃС‚Р°РЅРѕРІРѕРє\n"
+"5.РЎРѕС…СЂР°РЅРµРЅРёРµ РЅРѕРІС‹С… Р·Р°РїРёСЃРµР№ РІ С„Р°Р№Р»\n"
+"6.РР·РјРµРЅРµРЅРёРµ РІС‹Р±СЂР°РЅРЅРѕР№ Р·Р°РїРёСЃРё\n"
+"7.Р’С‹С…РѕРґ РёР· РїСЂРѕРіСЂР°РјРјС‹\n";
 
 
 struct Base {
@@ -25,20 +25,20 @@ struct Base {
 	double version;
 }; typedef struct Base base_t;
 
-FILE* OpenFileForWriting(const char* filename); // Обьявление функции для проверки на запись файла
-FILE* OpenFileForReading(const char* filename); // Обьявление функции для проверки на чтение файла
-int NewFileCreate(FILE* file, char name[]); // Обьявление функции для создания рабочего текстового файла с заданным именем
-int PrintToConsole(base_t* Base_t, int SizeMassiv); // Обьявление функции для печати всех полей массива в определнном виде
-int SaveFile(int* SizeMassiv, base_t* Base_t, char name[]); // Обьявление функции для записи изменений совершенных в базе данных в файл
-int Compare(const base_t* Base1_t, const base_t* Base2_t); // Обьявление функциии компаратора для использования алгоритма сортировки qsort
-int* SearchByDate(base_t* Base_t, int SizeMassiv, char DateForSearch[], int* SearchResults);// Обьявление функции для поиска индексов элементов массива по имени
-base_t* ReadFromAFile(char name[], base_t* Base_t, int* SizeMassiv); // Обьявление функции для первоначального считывания данных из текстового файла
-base_t* AddNewPole(base_t* Base_t, int* SizeMassiv); // Обьявление функции для добавления новой записи в массив
-base_t* EditBasePole(base_t* Base_t, int EditNumber);//Обьявление функции для изменения выбранной записи в массив
+FILE* OpenFileForWriting(const char* filename); // РћР±СЊСЏРІР»РµРЅРёРµ С„СѓРЅРєС†РёРё РґР»СЏ РїСЂРѕРІРµСЂРєРё РЅР° Р·Р°РїРёСЃСЊ С„Р°Р№Р»Р°
+FILE* OpenFileForReading(const char* filename); // РћР±СЊСЏРІР»РµРЅРёРµ С„СѓРЅРєС†РёРё РґР»СЏ РїСЂРѕРІРµСЂРєРё РЅР° С‡С‚РµРЅРёРµ С„Р°Р№Р»Р°
+int NewFileCreate(FILE* file, char name[]); // РћР±СЊСЏРІР»РµРЅРёРµ С„СѓРЅРєС†РёРё РґР»СЏ СЃРѕР·РґР°РЅРёСЏ СЂР°Р±РѕС‡РµРіРѕ С‚РµРєСЃС‚РѕРІРѕРіРѕ С„Р°Р№Р»Р° СЃ Р·Р°РґР°РЅРЅС‹Рј РёРјРµРЅРµРј
+int PrintToConsole(base_t* Base_t, int SizeMassiv); // РћР±СЊСЏРІР»РµРЅРёРµ С„СѓРЅРєС†РёРё РґР»СЏ РїРµС‡Р°С‚Рё РІСЃРµС… РїРѕР»РµР№ РјР°СЃСЃРёРІР° РІ РѕРїСЂРµРґРµР»РЅРЅРѕРј РІРёРґРµ
+int SaveFile(int* SizeMassiv, base_t* Base_t, char name[]); // РћР±СЊСЏРІР»РµРЅРёРµ С„СѓРЅРєС†РёРё РґР»СЏ Р·Р°РїРёСЃРё РёР·РјРµРЅРµРЅРёР№ СЃРѕРІРµСЂС€РµРЅРЅС‹С… РІ Р±Р°Р·Рµ РґР°РЅРЅС‹С… РІ С„Р°Р№Р»
+int Compare(const base_t* Base1_t, const base_t* Base2_t); // РћР±СЊСЏРІР»РµРЅРёРµ С„СѓРЅРєС†РёРёРё РєРѕРјРїР°СЂР°С‚РѕСЂР° РґР»СЏ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ Р°Р»РіРѕСЂРёС‚РјР° СЃРѕСЂС‚РёСЂРѕРІРєРё qsort
+int* SearchByDate(base_t* Base_t, int SizeMassiv, char DateForSearch[], int* SearchResults);// РћР±СЊСЏРІР»РµРЅРёРµ С„СѓРЅРєС†РёРё РґР»СЏ РїРѕРёСЃРєР° РёРЅРґРµРєСЃРѕРІ СЌР»РµРјРµРЅС‚РѕРІ РјР°СЃСЃРёРІР° РїРѕ РёРјРµРЅРё
+base_t* ReadFromAFile(char name[], base_t* Base_t, int* SizeMassiv); // РћР±СЊСЏРІР»РµРЅРёРµ С„СѓРЅРєС†РёРё РґР»СЏ РїРµСЂРІРѕРЅР°С‡Р°Р»СЊРЅРѕРіРѕ СЃС‡РёС‚С‹РІР°РЅРёСЏ РґР°РЅРЅС‹С… РёР· С‚РµРєСЃС‚РѕРІРѕРіРѕ С„Р°Р№Р»Р°
+base_t* AddNewPole(base_t* Base_t, int* SizeMassiv); // РћР±СЊСЏРІР»РµРЅРёРµ С„СѓРЅРєС†РёРё РґР»СЏ РґРѕР±Р°РІР»РµРЅРёСЏ РЅРѕРІРѕР№ Р·Р°РїРёСЃРё РІ РјР°СЃСЃРёРІ
+base_t* EditBasePole(base_t* Base_t, int EditNumber);//РћР±СЊСЏРІР»РµРЅРёРµ С„СѓРЅРєС†РёРё РґР»СЏ РёР·РјРµРЅРµРЅРёСЏ РІС‹Р±СЂР°РЅРЅРѕР№ Р·Р°РїРёСЃРё РІ РјР°СЃСЃРёРІ
 
 
 int main() {
-	setlocale(LC_ALL, 0);// Установка локализации консоли и ее очистка
+	setlocale(LC_ALL, 0);// РЈСЃС‚Р°РЅРѕРІРєР° Р»РѕРєР°Р»РёР·Р°С†РёРё РєРѕРЅСЃРѕР»Рё Рё РµРµ РѕС‡РёСЃС‚РєР°
 	system("chcp 1251");
 	system("cls");
 
@@ -53,17 +53,17 @@ int main() {
 	char* DateForSearch[12];
 
 
-	Base_t = (base_t*)malloc(1 * sizeof(base_t));//Выделение первоначальной ячейки памяти под массив
-	Base_t = ReadFromAFile(name, Base_t, &SizeMassiv);// Инициализация массива из файла
+	Base_t = (base_t*)malloc(1 * sizeof(base_t));//Р’С‹РґРµР»РµРЅРёРµ РїРµСЂРІРѕРЅР°С‡Р°Р»СЊРЅРѕР№ СЏС‡РµР№РєРё РїР°РјСЏС‚Рё РїРѕРґ РјР°СЃСЃРёРІ
+	Base_t = ReadFromAFile(name, Base_t, &SizeMassiv);// РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РјР°СЃСЃРёРІР° РёР· С„Р°Р№Р»Р°
 
-	printf("\t   Курсовая работа студента \n");
+	printf("\t   РљСѓСЂСЃРѕРІР°СЏ СЂР°Р±РѕС‚Р° СЃС‚СѓРґРµРЅС‚Р° \n");
 	printf("#-------------------------------------------#\n");
-	printf("# Имя студента: %-28s#\n", "Терехов Владислав");
-	printf("# Группа: %-34s#\n", "бИСТ - 232");
-	printf("# Тема курсовой работы: %-20s#\n", "Программа для работой с базой данных \"Игры в соц. сети\"");
+	printf("# РРјСЏ СЃС‚СѓРґРµРЅС‚Р°: %-28s#\n", "РўРµСЂРµС…РѕРІ Р’Р»Р°РґРёСЃР»Р°РІ");
+	printf("# Р“СЂСѓРїРїР°: %-34s#\n", "Р±РРЎРў - 232");
+	printf("# РўРµРјР° РєСѓСЂСЃРѕРІРѕР№ СЂР°Р±РѕС‚С‹: %-20s#\n", "РџСЂРѕРіСЂР°РјРјР° РґР»СЏ СЂР°Р±РѕС‚РѕР№ СЃ Р±Р°Р·РѕР№ РґР°РЅРЅС‹С… \"РРіСЂС‹ РІ СЃРѕС†. СЃРµС‚Рё\"");
 	puts("");
 
-	// Реализация пользователььского меню для взаимодействия с программой с помощью цикла while и оператора switch
+	// Р РµР°Р»РёР·Р°С†РёСЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЊСЊСЃРєРѕРіРѕ РјРµРЅСЋ РґР»СЏ РІР·Р°РёРјРѕРґРµР№СЃС‚РІРёСЏ СЃ РїСЂРѕРіСЂР°РјРјРѕР№ СЃ РїРѕРјРѕС‰СЊСЋ С†РёРєР»Р° while Рё РѕРїРµСЂР°С‚РѕСЂР° switch
 	while (ExitState != 1) {
 		printf(Menu);
 		int TempSize = SizeMassiv;
@@ -74,7 +74,7 @@ int main() {
 		case 1:
 			system("cls");
 			Base_t = AddNewPole(Base_t, &SizeMassiv);
-			printf("Запись добавлена в базу\n");
+			printf("Р—Р°РїРёСЃСЊ РґРѕР±Р°РІР»РµРЅР° РІ Р±Р°Р·Сѓ\n");
 			break;
 		case 2:
 			system("cls");
@@ -83,14 +83,14 @@ int main() {
 			break;
 		case 3:
 			system("cls");
-			printf("введите дату релиза в формате дд.мм.гггг для поиска записей в базе в базе\n");
+			printf("РІРІРµРґРёС‚Рµ РґР°С‚Сѓ СЂРµР»РёР·Р° РІ С„РѕСЂРјР°С‚Рµ РґРґ.РјРј.РіРіРіРі РґР»СЏ РїРѕРёСЃРєР° Р·Р°РїРёСЃРµР№ РІ Р±Р°Р·Рµ РІ Р±Р°Р·Рµ\n");
 			if (scanf("%s", &DateForSearch) != 1) return 1;
-			printf("по дате релиза %s найденны следующие записи\n", DateForSearch);
+			printf("РїРѕ РґР°С‚Рµ СЂРµР»РёР·Р° %s РЅР°Р№РґРµРЅРЅС‹ СЃР»РµРґСѓСЋС‰РёРµ Р·Р°РїРёСЃРё\n", DateForSearch);
 			SearchResults = SearchByDate(Base_t, TempSize, DateForSearch, SearchResults);
 			for (int i = 0; i < TempSize; i++) {
 				int foundindex = *SearchResults++;
 				if (foundindex >= 0 && foundindex <= TempSize) {
-					printf("имя: %s\nдата релиза: %s\nколличество установок: %d\nбаланс %f\nметод оплаты: %s\nверсия: %lf\n", Base_t[i].name, Base_t[i].realise, Base_t[i].installs, Base_t[i].balance, Base_t[i].paid, Base_t[i].version);
+					printf("РёРјСЏ: %s\nРґР°С‚Р° СЂРµР»РёР·Р°: %s\nРєРѕР»Р»РёС‡РµСЃС‚РІРѕ СѓСЃС‚Р°РЅРѕРІРѕРє: %d\nР±Р°Р»Р°РЅСЃ %f\nРјРµС‚РѕРґ РѕРїР»Р°С‚С‹: %s\nРІРµСЂСЃРёСЏ: %lf\n", Base_t[i].name, Base_t[i].realise, Base_t[i].installs, Base_t[i].balance, Base_t[i].paid, Base_t[i].version);
 				}
 			}
 			break;
@@ -101,10 +101,10 @@ int main() {
 			break;
 		case 5:
 			SaveFile(&SizeMassiv, Base_t, name);
-			printf("Внесенные изменения были сохранены\n");
+			printf("Р’РЅРµСЃРµРЅРЅС‹Рµ РёР·РјРµРЅРµРЅРёСЏ Р±С‹Р»Рё СЃРѕС…СЂР°РЅРµРЅС‹\n");
 			break;
 		case 6:
-			printf("Выбрана функция изменения изменения поля\n");
+			printf("Р’С‹Р±СЂР°РЅР° С„СѓРЅРєС†РёСЏ РёР·РјРµРЅРµРЅРёСЏ РёР·РјРµРЅРµРЅРёСЏ РїРѕР»СЏ\n");
 			PrintToConsole(Base_t, TempSize);
 			scanf("%d", &numedit);
 			Base_t = EditBasePole(Base_t, numedit);
@@ -120,7 +120,7 @@ int main() {
 	}
 }
 
-//Определение функции для создания файла с базой в случае его отсуствия
+//РћРїСЂРµРґРµР»РµРЅРёРµ С„СѓРЅРєС†РёРё РґР»СЏ СЃРѕР·РґР°РЅРёСЏ С„Р°Р№Р»Р° СЃ Р±Р°Р·РѕР№ РІ СЃР»СѓС‡Р°Рµ РµРіРѕ РѕС‚СЃСѓСЃС‚РІРёСЏ
 int NewFileCreate(FILE* file, char name[]) {
 	file = OpenFileForWriting(name);
 	fprintf(file, "%s %s %d %f %s %lf\n\n", "MyGame", "10.10.2023", "153", "253000", "Kiwi", "0.1");
@@ -128,7 +128,7 @@ int NewFileCreate(FILE* file, char name[]) {
 	return 0;
 }
 
-//Определение функции для первоначальной инициализации базы из файла
+//РћРїСЂРµРґРµР»РµРЅРёРµ С„СѓРЅРєС†РёРё РґР»СЏ РїРµСЂРІРѕРЅР°С‡Р°Р»СЊРЅРѕР№ РёРЅРёС†РёР°Р»РёР·Р°С†РёРё Р±Р°Р·С‹ РёР· С„Р°Р№Р»Р°
 base_t* ReadFromAFile(char name1[], base_t* Base_t, int* SizeMassiv) {
 	FILE* file = OpenFileForReading(name1);
 	int i = 0;
@@ -149,21 +149,21 @@ base_t* ReadFromAFile(char name1[], base_t* Base_t, int* SizeMassiv) {
 	return Base_t;
 }
 
-//Определение функции для печати базы в заданном виде
+//РћРїСЂРµРґРµР»РµРЅРёРµ С„СѓРЅРєС†РёРё РґР»СЏ РїРµС‡Р°С‚Рё Р±Р°Р·С‹ РІ Р·Р°РґР°РЅРЅРѕРј РІРёРґРµ
 int PrintToConsole(base_t* Base_t, int SizeMassiv) {
 	for (int i = 0; i < SizeMassiv; i++) {
 		printf("\n");
-		printf("%d. Имя: %s\n", i + 1, &Base_t[i].name);
-		printf("Дата релиза: %s\n", &Base_t[i].realise);
-		printf("Колличество установок: %d\n", Base_t[i].installs);
-		printf("Баланс: %f\t", Base_t[i].balance);
-		printf("Допустимый метод полаты: %s\t", &Base_t[i].paid);
-		printf("Версия: %lf\n\n", Base_t[i].version);
+		printf("%d. РРјСЏ: %s\n", i + 1, &Base_t[i].name);
+		printf("Р”Р°С‚Р° СЂРµР»РёР·Р°: %s\n", &Base_t[i].realise);
+		printf("РљРѕР»Р»РёС‡РµСЃС‚РІРѕ СѓСЃС‚Р°РЅРѕРІРѕРє: %d\n", Base_t[i].installs);
+		printf("Р‘Р°Р»Р°РЅСЃ: %f\t", Base_t[i].balance);
+		printf("Р”РѕРїСѓСЃС‚РёРјС‹Р№ РјРµС‚РѕРґ РїРѕР»Р°С‚С‹: %s\t", &Base_t[i].paid);
+		printf("Р’РµСЂСЃРёСЏ: %lf\n\n", Base_t[i].version);
 	}
 
 }
 
-//Определение функции для сохранения изменений в базе в текстовый файл
+//РћРїСЂРµРґРµР»РµРЅРёРµ С„СѓРЅРєС†РёРё РґР»СЏ СЃРѕС…СЂР°РЅРµРЅРёСЏ РёР·РјРµРЅРµРЅРёР№ РІ Р±Р°Р·Рµ РІ С‚РµРєСЃС‚РѕРІС‹Р№ С„Р°Р№Р»
 int SaveFile(int* SizeMassiv, base_t* Base_t, char name[]) {
 	FILE* file;
 	file = fopen(name, "w+");
@@ -173,7 +173,7 @@ int SaveFile(int* SizeMassiv, base_t* Base_t, char name[]) {
 	fclose(file);
 }
 
-//Определение функции компаратора
+//РћРїСЂРµРґРµР»РµРЅРёРµ С„СѓРЅРєС†РёРё РєРѕРјРїР°СЂР°С‚РѕСЂР°
 int Compare(const base_t* Base1_t, const base_t* Base2_t) {
 	const struct Base* a = Base1_t, * b = Base2_t;
 	int installs1, installs2;
@@ -184,7 +184,7 @@ int Compare(const base_t* Base1_t, const base_t* Base2_t) {
 	if (installs1 == installs2) return 0;
 }
 
-//Определение функции для поиска по дате
+//РћРїСЂРµРґРµР»РµРЅРёРµ С„СѓРЅРєС†РёРё РґР»СЏ РїРѕРёСЃРєР° РїРѕ РґР°С‚Рµ
 int* SearchByDate(base_t* Base_t, int SizeMassiv, char DateForSearch[], int* SearchResults) {
 	int n = 0;
 	for (int i = 0; i < SizeMassiv; i++) {
@@ -196,69 +196,67 @@ int* SearchByDate(base_t* Base_t, int SizeMassiv, char DateForSearch[], int* Sea
 	return SearchResults;
 }
 
-//Определение функции для добавления в массив новой записи
+//РћРїСЂРµРґРµР»РµРЅРёРµ С„СѓРЅРєС†РёРё РґР»СЏ РґРѕР±Р°РІР»РµРЅРёСЏ РІ РјР°СЃСЃРёРІ РЅРѕРІРѕР№ Р·Р°РїРёСЃРё
 base_t* AddNewPole(base_t* Base_t, int* SizeMassiv) {
 	*SizeMassiv += 1;
 	Base_t = (base_t*)realloc(Base_t, *SizeMassiv * sizeof(base_t));
 	if (Base_t == NULL) {
-		printf("\a Ошибка при увелечении размера массива\n");
+		printf("\a РћС€РёР±РєР° РїСЂРё СѓРІРµР»РµС‡РµРЅРёРё СЂР°Р·РјРµСЂР° РјР°СЃСЃРёРІР°\n");
 		return Base_t;
 	}
-	printf("Введите название игры\n");
+	printf("Р’РІРµРґРёС‚Рµ РЅР°Р·РІР°РЅРёРµ РёРіСЂС‹\n");
 	if (scanf("%s", &Base_t[*SizeMassiv - 1].name) != 1) return 1;
 
-	printf("Введите дату релиза в формате ДД.ММ.ГГГГ\n");
+	printf("Р’РІРµРґРёС‚Рµ РґР°С‚Сѓ СЂРµР»РёР·Р° РІ С„РѕСЂРјР°С‚Рµ Р”Р”.РњРњ.Р“Р“Р“Р“\n");
 	if (scanf("%s", &Base_t[*SizeMassiv - 1].realise) != 1) return 1;
 
-	printf("Введите колличество установок у игры \n");;
+	printf("Р’РІРµРґРёС‚Рµ РєРѕР»Р»РёС‡РµСЃС‚РІРѕ СѓСЃС‚Р°РЅРѕРІРѕРє Сѓ РёРіСЂС‹ \n");;
 	if (scanf("%d", &Base_t[*SizeMassiv - 1].installs) != 1) return 1;
 
-	printf("Введите баланс игры\n");
+	printf("Р’РІРµРґРёС‚Рµ Р±Р°Р»Р°РЅСЃ РёРіСЂС‹\n");
 	if (scanf("%f", &Base_t[*SizeMassiv - 1].balance) != 1) return 1;
 
-	printf("Введите возможный метод оплаты\n");
+	printf("Р’РІРµРґРёС‚Рµ РІРѕР·РјРѕР¶РЅС‹Р№ РјРµС‚РѕРґ РѕРїР»Р°С‚С‹\n");
 	if (scanf("%s", &Base_t[*SizeMassiv - 1].paid) != 1) return 1;
 
-	printf("Введите версию\n");
+	printf("Р’РІРµРґРёС‚Рµ РІРµСЂСЃРёСЋ\n");
 	if (scanf("%lf", &Base_t[*SizeMassiv - 1].version) != 1) return 1;
 	return Base_t;
 }
 
 base_t* EditBasePole(base_t* Base_t, int EditNumber) {
-	printf("Начальная запись выбранная для редактирования\t Имя: %s\nДата релиза: %s\nКолличество установок: %d\nБаланс %f\nМетод оплаты: %s\n Версия: %lf\n",
+	printf("РќР°С‡Р°Р»СЊРЅР°СЏ Р·Р°РїРёСЃСЊ РІС‹Р±СЂР°РЅРЅР°СЏ РґР»СЏ СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ\t РРјСЏ: %s\nР”Р°С‚Р° СЂРµР»РёР·Р°: %s\nРљРѕР»Р»РёС‡РµСЃС‚РІРѕ СѓСЃС‚Р°РЅРѕРІРѕРє: %d\nР‘Р°Р»Р°РЅСЃ %f\nРњРµС‚РѕРґ РѕРїР»Р°С‚С‹: %s\n Р’РµСЂСЃРёСЏ: %lf\n",
 		Base_t[EditNumber].name, Base_t[EditNumber].realise, Base_t[EditNumber].installs, Base_t[EditNumber].balance, Base_t[EditNumber].paid, Base_t[EditNumber].version);
-	printf("Введите название игры\n");
+	printf("Р’РІРµРґРёС‚Рµ РЅР°Р·РІР°РЅРёРµ РёРіСЂС‹\n");
 	if (scanf("%s", &Base_t[EditNumber].name) != 1) return 1;
 
-	printf("Введите дату релиза в формате ДД.ММ.ГГГГ\n");
+	printf("Р’РІРµРґРёС‚Рµ РґР°С‚Сѓ СЂРµР»РёР·Р° РІ С„РѕСЂРјР°С‚Рµ Р”Р”.РњРњ.Р“Р“Р“Р“\n");
 	if (scanf("%s", &Base_t[EditNumber].realise) != 1) return 1;
 
-	printf("Введите колличество установок у игры \n");;
+	printf("Р’РІРµРґРёС‚Рµ РєРѕР»Р»РёС‡РµСЃС‚РІРѕ СѓСЃС‚Р°РЅРѕРІРѕРє Сѓ РёРіСЂС‹ \n");;
 	if (scanf("%d", &Base_t[EditNumber].installs) != 1) return 1;
 
-	printf("Введите баланс игры\n");
+	printf("Р’РІРµРґРёС‚Рµ Р±Р°Р»Р°РЅСЃ РёРіСЂС‹\n");
 	if (scanf("%f", &Base_t[EditNumber].balance) != 1) return 1;
 
-	printf("Введите возможный метод оплаты\n");
+	printf("Р’РІРµРґРёС‚Рµ РІРѕР·РјРѕР¶РЅС‹Р№ РјРµС‚РѕРґ РѕРїР»Р°С‚С‹\n");
 	if (scanf("%s", &Base_t[EditNumber].paid) != 1) return 1;
 
-	printf("Введите версию\n");
+	printf("Р’РІРµРґРёС‚Рµ РІРµСЂСЃРёСЋ\n");
 	if (scanf("%lf", &Base_t[EditNumber].version) != 1) return 1;
 	return Base_t;
 }
-FILE* OpenFileForWriting(const char* filename)	
+void* OpenFileForWriting(const char* filename)
 {
 	FILE* file = fopen(filename, "w");
 	if (!file)
 	{
-		printf("Ошибка при открытии файла %s для записи.\n", filename);
+		printf("РћС€РёР±РєР° РїСЂРё РѕС‚РєСЂС‹С‚РёРё С„Р°Р№Р»Р° %s РґР»СЏ Р·Р°РїРёСЃРё.\n", filename);
 	}
-	return file;
 }
-FILE* OpenFileForReading(const char* filename) {
+void* OpenFileForReading(const char* filename) {
 	FILE* file = fopen(filename, "r");
 	if (!file) {
-		printf("Ошибка при открытии файла %s для чтения.\n", filename);
+		printf("РћС€РёР±РєР° РїСЂРё РѕС‚РєСЂС‹С‚РёРё С„Р°Р№Р»Р° %s РґР»СЏ С‡С‚РµРЅРёСЏ.\n", filename);
 	}
-	return file;
 }
