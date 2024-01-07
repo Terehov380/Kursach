@@ -13,7 +13,8 @@ const char Menu[] = "Выберите пункт меню введя соотв�
 "4.Cортировка записей по колличесву установок\n"
 "5.Сохранение новых записей в файл\n"
 "6.Изменение выбранной записи\n"
-"7.Выход из программы\n";
+"7.Поиск по имени\n"
+"8.Выход из программы\n";
 
 
 struct Base {
@@ -25,9 +26,15 @@ struct Base {
 	double version;
 }; typedef struct Base base_t;
 
+struct Month
+{
+	char key[2];
+	char value[20];
+};
+
 FILE* OpenFileForWriting(const char* filename); // Обьявление функции для проверки на запись файла
 FILE* OpenFileForReading(const char* filename); // Обьявление функции для проверки на чтение файла
-int NewFileCreate(FILE* file, char name[]); // Обьявление функции для создания рабочего текстового файла с заданным именем
+FILE* NewFileCreate(FILE* file, char name[]); // Обьявление функции для создания рабочего текстового файла с заданным именем
 int PrintToConsole(base_t* Base_t, int SizeMassiv); // Обьявление функции для печати всех полей массива в определнном виде
 int SaveFile(int* SizeMassiv, base_t* Base_t, char name[]); // Обьявление функции для записи изменений совершенных в базе данных в файл
 int Compare(const base_t* Base1_t, const base_t* Base2_t); // Обьявление функциии компаратора для использования алгоритма сортировки qsort
@@ -35,7 +42,8 @@ int* SearchByDate(base_t* Base_t, int SizeMassiv, char DateForSearch[], int* Sea
 base_t* ReadFromAFile(char name[], base_t* Base_t, int* SizeMassiv); // Обьявление функции для первоначального считывания данных из текстового файла
 base_t* AddNewPole(base_t* Base_t, int* SizeMassiv); // Обьявление функции для добавления новой записи в массив
 base_t* EditBasePole(base_t* Base_t, int EditNumber);//Обьявление функции для изменения выбранной записи в массив
-
+int* SearchByName(base_t* Base_t, int SizeMassiv, char gameName[], int* SearchResults);
+int* SearchByMonth(base_t* Base_t, int SizeMassiv, char month[], int* SearchResults);
 
 int main() {
 	setlocale(LC_ALL, 0);// Установка локализации консоли и ее очистка
@@ -44,6 +52,14 @@ int main() {
 
 
 	base_t* Base_t;
+	struct Month months[12] = { {"01", "Январь"}, {"02", "Февраль"}, {"03", "Март"}, {"04", "Апрель"}, {"05", "Май"},
+	{"06", "Июнь"},
+	{"07", "Июль"},
+	{"08", "Август"},
+	{"09", "Сентябрь"},
+	{"10", "Октябрь"},
+	{"11", "Ноябрь"},
+	{"12", "Декабрь"} };
 
 	int SizeMassiv = 0;
 	int ExitState = 0;
@@ -51,12 +67,13 @@ int main() {
 	int numedit = 0;
 	char name[] = "Games.txt";
 	char* DateForSearch[12];
-
+	char gameName[12];
+	char month[12];
 
 	Base_t = (base_t*)malloc(1 * sizeof(base_t));//Выделение первоначальной ячейки памяти под массив
 	Base_t = ReadFromAFile(name, Base_t, &SizeMassiv);// Инициализация массива из файла
 
-	printf("\t   Курсовая работа студента \n");
+	printf("\t Курсовая работа студента \n");
 	printf("#-------------------------------------------#\n");
 	printf("# Имя студента: %-28s#\n", "Терехов Владислав");
 	printf("# Группа: %-34s#\n", "бИСТ - 232");
@@ -83,16 +100,18 @@ int main() {
 			break;
 		case 3:
 			system("cls");
-			printf("введите дату релиза в формате дд.мм.гггг для поиска записей в базе в базе\n");
+			printf("введите дату релиза в формате дд.мм.гггг для поиска записей в базе\n");
 			if (scanf("%s", &DateForSearch) != 1) return 1;
 			printf("по дате релиза %s найденны следующие записи\n", DateForSearch);
-			SearchResults = SearchByDate(Base_t, TempSize, DateForSearch, SearchResults);
+			SearchResults = SearchByDate(Base_t, TempSize, DateForSearch,
+				SearchResults);
 			for (int i = 0; i < TempSize; i++) {
 				int foundindex = *SearchResults++;
 				if (foundindex >= 0 && foundindex <= TempSize) {
 					printf("имя: %s\nдата релиза: %s\nколличество установок: %d\nбаланс %f\nметод оплаты: %s\nверсия: %lf\n", Base_t[i].name, Base_t[i].realise, Base_t[i].installs, Base_t[i].balance, Base_t[i].paid, Base_t[i].version);
 				}
 			}
+			SearchResults = (int*)calloc(TempSize, sizeof(int));
 			break;
 		case 4:
 			system("cls");
@@ -110,9 +129,23 @@ int main() {
 			Base_t = EditBasePole(Base_t, numedit);
 			break;
 		case 7:
+			system("cls");
+			printf("введите название игры: ");
+			if (scanf("%s", &gameName) != 1) return 1;
+			printf("по имени %s найденны следующие записи\n", gameName);
+			SearchByName(Base_t, TempSize, gameName, SearchResults);
+			break;
+		case 8:
 			free(Base_t);
 			free(SearchResults);
 			exit(0);
+			break;
+		case 9:
+			system("cls");
+			printf("введите месяц игры: ");
+			if (scanf("%s", &month) != 1) return 1;
+			printf("по месяцу %s найдены следующие записи\n", month);
+			SearchByMonth(Base_t, TempSize, month, SearchResults);
 			break;
 		default:
 			break;
@@ -120,12 +153,32 @@ int main() {
 	}
 }
 
+FILE* OpenFileForWriting(const char* filename)
+{
+	FILE* file = fopen(filename, "w");
+	if (!file)
+	{
+		printf("Ошибка при открытии файла %s для записи.\n", filename);
+		return file;
+	}
+	return file;
+}
+
+FILE* OpenFileForReading(const char* filename)
+{
+	FILE* file = fopen(filename, "r");
+	if (!file)
+	{
+		return NewFileCreate(file, filename);
+	}
+	return file;
+}
+
 //Определение функции для создания файла с базой в случае его отсуствия
-int NewFileCreate(FILE* file, char name[]) {
+FILE* NewFileCreate(FILE* file, char name[])
+{
 	file = OpenFileForWriting(name);
-	fprintf(file, "%s %s %d %f %s %lf\n\n", "MyGame", "10.10.2023", "153", "253000", "Kiwi", "0.1");
-	fclose(file);
-	return 0;
+	return file;
 }
 
 //Определение функции для первоначальной инициализации базы из файла
@@ -177,7 +230,8 @@ int SaveFile(int* SizeMassiv, base_t* Base_t, char name[]) {
 int Compare(const base_t* Base1_t, const base_t* Base2_t) {
 	const struct Base* a = Base1_t, * b = Base2_t;
 	int installs1, installs2;
-	installs1 = a->installs;
+	installs1 =
+		a->installs;
 	installs2 = b->installs;
 	if (installs1 < installs2) return 1;
 	if (installs1 > installs2) return -1;
@@ -192,6 +246,40 @@ int* SearchByDate(base_t* Base_t, int SizeMassiv, char DateForSearch[], int* Sea
 			SearchResults[n++] = i;
 		}
 		else SearchResults[n++] = SizeMassiv + 10;
+	}
+	return SearchResults;
+}
+
+int* SearchByName(base_t* Base_t, int SizeMassiv, char gameName[], int* SearchResults) {
+	int n = 0;
+	for (int i = 0; i < SizeMassiv; i++) {
+		if (strcmp(Base_t[i].name, gameName) == 0) {
+			printf("\n");
+			printf("Имя: %s\n", &Base_t[i].name);
+			printf("Дата релиза: %s\n", &Base_t[i].realise);
+			printf("Колличество установок: %d\n", Base_t[i].installs);
+			printf("Баланс: %f\t", Base_t[i].balance);
+			printf("Допустимый метод полаты: %s\t", &Base_t[i].paid);
+			printf("Версия: %lf\n\n", Base_t[i].version);
+		}
+	}
+	return SearchResults;
+}
+
+int* SearchByMonth(base_t* Base_t, int SizeMassiv, char month[], int* SearchResults) {
+	int n = 0;
+	char monthOfGame[3];
+	for (int i = 0; i < SizeMassiv; i++) {
+		sscanf(Base_t[i].realise, "%*c%*c.%[^.]", monthOfGame);
+		if (strcmp(monthOfGame, month) == 0) {
+			printf("\n");
+			printf("Имя: %s\n", &Base_t[i].name);
+			printf("Дата релиза: %s\n", &Base_t[i].realise);
+			printf("Колличество установок: %d\n", Base_t[i].installs);
+			printf("Баланс: %f\t", Base_t[i].balance);
+			printf("Допустимый метод полаты: %s\t", &Base_t[i].paid);
+			printf("Версия: %lf\n\n", Base_t[i].version);
+		}
 	}
 	return SearchResults;
 }
@@ -245,18 +333,4 @@ base_t* EditBasePole(base_t* Base_t, int EditNumber) {
 	printf("Введите версию\n");
 	if (scanf("%lf", &Base_t[EditNumber].version) != 1) return 1;
 	return Base_t;
-}
-void* OpenFileForWriting(const char* filename)
-{
-	FILE* file = fopen(filename, "w");
-	if (!file)
-	{
-		printf("Ошибка при открытии файла %s для записи.\n", filename);
-	}
-}
-void* OpenFileForReading(const char* filename) {
-	FILE* file = fopen(filename, "r");
-	if (!file) {
-		printf("Ошибка при открытии файла %s для чтения.\n", filename);
-	}
 }
