@@ -5,7 +5,6 @@
 #include <string.h>
 #include <ctype.h>
 #include <malloc.h>
-
 const char Menu[] = "Выберите пункт меню введя соответсвующую цифру:\n"
 "1.Создание новой записи в базе данных\n"
 "2.Чтение всех записей\n"
@@ -15,8 +14,6 @@ const char Menu[] = "Выберите пункт меню введя соотв�
 "6.Изменение выбранной записи\n"
 "7.Поиск по имени\n"
 "8.Выход из программы\n";
-
-
 struct Base {
 	char name[30];
 	char realise[12];
@@ -25,13 +22,11 @@ struct Base {
 	char paid[50];
 	double version;
 }; typedef struct Base base_t;
-
 struct Month
 {
 	char key[2];
 	char value[20];
 };
-
 FILE* OpenFileForWriting(const char* filename); // Обьявление функции для проверки на запись файла
 FILE* OpenFileForReading(const char* filename); // Обьявление функции для проверки на чтение файла
 FILE* NewFileCreate(FILE* file, char name[]); // Обьявление функции для создания рабочего текстового файла с заданным именем
@@ -49,8 +44,6 @@ int main() {
 	setlocale(LC_ALL, 0);// Установка локализации консоли и ее очистка
 	system("chcp 1251");
 	system("cls");
-
-
 	base_t* Base_t;
 	struct Month months[12] = { {"01", "Январь"}, {"02", "Февраль"}, {"03", "Март"}, {"04", "Апрель"}, {"05", "Май"},
 	{"06", "Июнь"},
@@ -60,7 +53,6 @@ int main() {
 	{"10", "Октябрь"},
 	{"11", "Ноябрь"},
 	{"12", "Декабрь"} };
-
 	int SizeMassiv = 0;
 	int ExitState = 0;
 	int SwitchNum = 0;
@@ -69,10 +61,8 @@ int main() {
 	char* DateForSearch[12];
 	char gameName[12];
 	char month[12];
-
 	Base_t = (base_t*)malloc(1 * sizeof(base_t));//Выделение первоначальной ячейки памяти под массив
 	Base_t = ReadFromAFile(name, Base_t, &SizeMassiv);// Инициализация массива из файла
-
 	printf("\t Курсовая работа студента \n");
 	printf("#-------------------------------------------#\n");
 	printf("# Имя студента: %-28s#\n", "Терехов Владислав");
@@ -101,9 +91,8 @@ int main() {
 		case 3:
 			system("cls");
 			printf("введите дату релиза в формате дд.мм.гггг для поиска записей в базе\n");
-			if (scanf("%s", &DateForSearch) != 1) return 1;
-			printf("по дате релиза %s найденны следующие записи\n", DateForSearch);
-			SearchResults = SearchByDate(Base_t, TempSize, DateForSearch,
+			if (scanf("%s", &DateForSearch) != 1) return 1;	printf("по дате релиза %s найденны следующие записи\n", DateForSearch);
+		SearchResults = SearchByDate(Base_t, TempSize, DateForSearch,
 				SearchResults);
 			for (int i = 0; i < TempSize; i++) {
 				int foundindex = *SearchResults++;
