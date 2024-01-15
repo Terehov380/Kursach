@@ -13,7 +13,8 @@ const char Menu[] = "Выберите пункт меню введя соотв�
 "5.Сохранение новых записей в файл\n"
 "6.Изменение выбранной записи\n"
 "7.Поиск по имени\n"
-"8.Выход из программы\n";
+"8.Поиск по месяцу\n"
+"9.Выход из программы\n";
 struct Base {
 	char name[30];
 	char realise[12];
@@ -91,8 +92,9 @@ int main() {
 		case 3:
 			system("cls");
 			printf("введите дату релиза в формате дд.мм.гггг для поиска записей в базе\n");
-			if (scanf("%s", &DateForSearch) != 1) return 1;	printf("по дате релиза %s найденны следующие записи\n", DateForSearch);
-		SearchResults = SearchByDate(Base_t, TempSize, DateForSearch,
+			if (scanf("%s", &DateForSearch) != 1) return 1;	
+			printf("по дате релиза %s найденны следующие записи\n", DateForSearch);
+			SearchResults = SearchByDate(Base_t, TempSize, DateForSearch,
 				SearchResults);
 			for (int i = 0; i < TempSize; i++) {
 				int foundindex = *SearchResults++;
@@ -125,16 +127,16 @@ int main() {
 			SearchByName(Base_t, TempSize, gameName, SearchResults);
 			break;
 		case 8:
-			free(Base_t);
-			free(SearchResults);
-			exit(0);
-			break;
-		case 9:
 			system("cls");
 			printf("введите месяц игры: ");
 			if (scanf("%s", &month) != 1) return 1;
 			printf("по месяцу %s найдены следующие записи\n", month);
 			SearchByMonth(Base_t, TempSize, month, SearchResults);
+			break;
+		case 9:
+			free(Base_t);
+			free(SearchResults);
+			exit(0);
 			break;
 		default:
 			break;
@@ -219,8 +221,7 @@ int SaveFile(int* SizeMassiv, base_t* Base_t, char name[]) {
 int Compare(const base_t* Base1_t, const base_t* Base2_t) {
 	const struct Base* a = Base1_t, * b = Base2_t;
 	int installs1, installs2;
-	installs1 =
-		a->installs;
+	installs1 = a->installs;
 	installs2 = b->installs;
 	if (installs1 < installs2) return 1;
 	if (installs1 > installs2) return -1;
